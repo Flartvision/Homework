@@ -5,8 +5,6 @@ import (
 	"strings"
 )
 
-// Заменить switch на map
-
 var curMap = map[string]map[string]float64{
 	"EUR": {"RUB": 101.73, "USD": 1.11},
 	"USD": {"RUB": 91.49, "EUR": 0.90},
