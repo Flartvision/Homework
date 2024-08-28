@@ -14,7 +14,7 @@ var curMap = map[string]map[string]float64{
 func main() {
 	cur1, valConv, cur2 := getUserInput()
 
-	calcCur(valConv, cur1, cur2)
+	calcCur(&valConv, &cur1, &cur2)
 
 }
 
@@ -70,8 +70,8 @@ func getUserInput() (string, float64, string) {
 
 }
 
-func calcCur(val float64, cur1, cur2 string) {
-	fmt.Printf("Курс %s к %s составляет: %.2f %s. \n", cur1, cur2, curMap[cur1][cur2]*val, cur1)
+func calcCur(val *float64, cur1, cur2 *string) {
+	fmt.Printf("Курс %s к %s составляет: %.2f %s. \n", *cur1, *cur2, curMap[*cur1][*cur2]*(*val), *cur1)
 }
 
 func checkCurIn(pCur *string) bool {
