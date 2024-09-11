@@ -5,13 +5,16 @@ import (
 	"strings"
 )
 
-const U2E = 0.90145
-const U2R = 89.46
+var curMap = map[string]map[string]float64{
+	"EUR": {"RUB": 101.73, "USD": 1.11},
+	"USD": {"RUB": 91.49, "EUR": 0.90},
+	"RUB": {"EUR": 0.0098, "USD": 0.011},
+}
 
 func main() {
 	cur1, valConv, cur2 := getUserInput()
 
-	calcCur(valConv, cur1, cur2)
+	calcCur(&valConv, &cur1, &cur2)
 
 }
 
@@ -35,7 +38,7 @@ func getUserInput() (string, float64, string) {
 
 		fmt.Println("Введите  валюту (Числовой параметр):")
 		_, err := fmt.Scan(&valConv)
-		fmt.Println(valConv)
+		//fmt.Println(valConv)
 		isFloat := fmt.Sprintf("%T", valConv)
 
 		if err != nil || isFloat != "float64" {
@@ -63,34 +66,18 @@ func getUserInput() (string, float64, string) {
 		break
 	}
 
-	return strings.ToLower(cur1), valConv, strings.ToLower(cur2)
+	return strings.ToUpper(cur1), valConv, strings.ToUpper(cur2)
 
 }
 
-func calcCur(val float64, cur1, cur2 string) {
-	E2R := U2R / U2E
-
-	switch {
-	case cur1 == "usd" && cur2 == "eur":
-		fmt.Printf("%.3f \n", val*U2E)
-	case cur1 == "eur" && cur2 == "usd":
-		fmt.Printf("%.3f \n", val/U2E)
-	case cur1 == "rub" && cur2 == "usd":
-		fmt.Printf("%.3f \n", val/U2R)
-	case cur1 == "usd" && cur2 == "rub":
-		fmt.Printf("%.3f \n", val*U2R)
-	case cur1 == "rub" && cur2 == "eur":
-		fmt.Printf("%.3f \n", val/E2R)
-	case cur1 == "eur" && cur2 == "rub":
-		fmt.Printf("%.3f \n", val*E2R)
-	}
-
+func calcCur(val *float64, cur1, cur2 *string) {
+	fmt.Printf("Курс %s к %s составляет: %.2f %s. \n", *cur1, *cur2, curMap[*cur1][*cur2]*(*val), *cur1)
 }
 
 func checkCurIn(pCur *string) bool {
-	cur := strings.ToLower(*pCur)
+	cur := strings.ToUpper(*pCur)
 
-	if cur == "usd" || cur == "eur" || cur == "rub" {
+	if cur == "USD" || cur == "EUR" || cur == "RUB" {
 		return true
 	}
 
