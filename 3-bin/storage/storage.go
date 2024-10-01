@@ -2,6 +2,7 @@ package storage
 
 import (
 	"bin/bins"
+	"bin/config"
 	"bin/file"
 	"encoding/json"
 	"fmt"
@@ -9,6 +10,7 @@ import (
 
 type Storage struct {
 	Bins []bins.Bin
+	env  config.ChEnv
 }
 
 type DI interface {
@@ -31,6 +33,7 @@ func NewStorage() *Storage {
 		fmt.Println(err)
 		return &Storage{
 			Bins: []bins.Bin{},
+			env:  *config.REnv(),
 		}
 	}
 

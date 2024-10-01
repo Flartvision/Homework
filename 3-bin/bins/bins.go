@@ -15,7 +15,6 @@ type BinList struct {
 	data []Bin
 }
 
-
 func NewBin(id string, name string, p bool) *Bin {
 
 	return &Bin{

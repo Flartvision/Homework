@@ -5,15 +5,13 @@ import (
 	"sort"
 	"strconv"
 	"strings"
-
 )
 
-var menu = map[string]func(n []float64)float64{
-		"avg": avg,
-		"sum": sum,
-		"med": med,
+var menu = map[string]func(n []float64) float64{
+	"avg": avg,
+	"sum": sum,
+	"med": med,
 }
-
 
 var numsR = make([]float64, 0, 100)
 
@@ -22,9 +20,9 @@ func main() {
 	usCh := scanUserInp()
 
 	getNums(&numsR)
-    //сюда меню функцию добавить
-		menuFunc := menu[usCh]
-		fmt.Println("Результат операции:", menuFunc(numsR))
+	//сюда меню функцию добавить
+	menuFunc := menu[usCh]
+	fmt.Println("Результат операции:", menuFunc(numsR))
 	//switch usCh {
 	//case "AVG":
 	//	fmt.Printf("Среднее чисел равно %.2f", avg(numsR))
@@ -32,19 +30,19 @@ func main() {
 	//	fmt.Printf("Медиана чисел равна %.2f", med(numsR))
 	//case "SUM":
 	//	fmt.Printf("Сумма чисел равна: %.2f", sum(numsR))
-	
+
 }
 func scanUserInp() string {
 	var usCh string
 	for {
 		fmt.Println("Выберите необходимую функцию (AVG, MED, SUM)")
 		fmt.Scanln(&usCh)
-		
+
 		switch strings.ToLower(usCh) {
 		case "avg", "med", "sum":
-				return usCh
+			return usCh
 		default:
-				fmt.Println("Введён некорректный параметр")
+			fmt.Println("Введён некорректный параметр")
 		}
 	}
 }
