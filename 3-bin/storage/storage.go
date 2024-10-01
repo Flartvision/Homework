@@ -11,6 +11,11 @@ type Storage struct {
 	Bins []bins.Bin
 }
 
+type DI interface {
+	Rfile(name string) ([]byte, error)
+	Wfile(content []byte, name string)
+}
+
 func (s *Storage) ToBytes() ([]byte, error) {
 	file, err := json.Marshal(s)
 
