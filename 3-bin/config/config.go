@@ -4,16 +4,16 @@ import (
 	"os"
 )
 
-type chEnv struct {
+type ChEnv struct {
 	Env string
 }
 
-func rEnv() *chEnv {
+func REnv() *ChEnv {
 	env := os.Getenv("KEY")
 	if env == "" {
 		panic("Не удалось прочитать переменные окружения")
 	}
-	return &chEnv{
+	return &ChEnv{
 		Env: env,
 	}
 }
